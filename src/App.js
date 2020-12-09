@@ -24,9 +24,16 @@ function App() {
     setUserList(nUserList);
  }
 
+ const handleDelete = (id) => {
+  if(editUserID === id)
+    setEditUserID(null);
+  const nUserList = userList.filter(userr => userr.id !== id);
+  setUserList(nUserList);
+}
+
   return (
     <div className="App"> 
-      {userList && <List users={userList} setUserID={setEditUserID} />}
+      {userList && userList.length > 0 && <List users={userList} setUserID={setEditUserID} handleDelete={handleDelete} />}
       {editUserID && <User users={userList} handleUsers={handleUsers} user={userList.find(user => user.id.includes(editUserID))} /> }
     </div>
   );
