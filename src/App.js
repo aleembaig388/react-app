@@ -15,11 +15,19 @@ function App() {
       console.log(ex);  
     });
   }, []);
+  
+
+  const handleUsers = (name) => {
+    const nUserList = [...userList];
+    var objIndex = nUserList.findIndex(userr => userr.id === editUserID);
+    nUserList[objIndex].name = name; 
+    setUserList(nUserList);
+ }
 
   return (
     <div className="App"> 
       {userList && <List users={userList} setUserID={setEditUserID} />}
-      {editUserID && <User users={userList} setUserList={setUserList} user={userList.find(user => user.id.includes(editUserID))} /> }
+      {editUserID && <User users={userList} handleUsers={handleUsers} user={userList.find(user => user.id.includes(editUserID))} /> }
     </div>
   );
 }
